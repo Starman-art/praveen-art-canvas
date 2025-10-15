@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Mail, ExternalLink } from 'lucide-react';
 import heroCollage from '@/assets/hero-collage.jpg';
+import heroBackground from '@/assets/hero-background.jpg';
 
 export const Hero = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -14,8 +15,24 @@ export const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-card" />
+      {/* Painted background image */}
+      <div className="absolute inset-0">
+        <img 
+          src={heroBackground} 
+          alt="Game art background" 
+          className="w-full h-full object-cover opacity-40"
+        />
+      </div>
+      
+      {/* Gradient overlays */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background/90" />
+      <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-background/70" />
+      
+      {/* Textured overlay */}
+      <div className="absolute inset-0 opacity-30 mix-blend-overlay" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E")`,
+        backgroundRepeat: 'repeat'
+      }} />
       
       <div className="container relative z-10 px-4 py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
